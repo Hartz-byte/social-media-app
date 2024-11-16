@@ -1,29 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import Logo from "../assets/logo/Buzzz.jpg";
 
 const SplashScreen: React.FC = () => {
   const navigate = useNavigate();
-
   const [showMainText, setShowMainText] = useState(false);
   const [showSubText, setShowSubText] = useState(false);
 
   useEffect(() => {
+    const auth = getAuth();
+
+    // user authentication check
+    const checkAuthStatus = () => {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // if the user is logged in then navigate to home page
+          setTimeout(() => {
+            navigate("/home");
+          }, 5000);
+        } else {
+          // if not logged in then navigate to login page
+          setTimeout(() => {
+            navigate("/login");
+          }, 5000);
+        }
+      });
+    };
+
+    checkAuthStatus();
+
     // main text after the logo animation
     const mainTextTimeout = setTimeout(() => setShowMainText(true), 1000);
     // subtext after the main text animation
     const subTextTimeout = setTimeout(() => setShowSubText(true), 2000);
 
-    // navigate to the login page after animations
-    const navigateTimeout = setTimeout(() => {
-      navigate("/login");
-    }, 5000);
-
     return () => {
       clearTimeout(mainTextTimeout);
       clearTimeout(subTextTimeout);
-      clearTimeout(navigateTimeout);
     };
   }, [navigate]);
 
