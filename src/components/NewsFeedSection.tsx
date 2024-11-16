@@ -1,6 +1,6 @@
 const NewsFeedSection = () => {
   return (
-    <div className="w-[60%] flex items-center justify-center bg-[#3a3a3a]">
+    <div className="w-[60%] flex items-center justify-center">
       <p>News Feed Section</p>
     </div>
   );
