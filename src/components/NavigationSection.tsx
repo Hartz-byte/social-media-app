@@ -1,19 +1,24 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 
 import Logo from "../assets/logo/Buzzz.jpg";
 
-const NavigationSection = () => {
+const NavigationSection = ({
+  onChangeSection,
+}: {
+  onChangeSection: (section: string) => void;
+}) => {
+  const [activeTab, setActiveTab] = useState("home");
   const navigate = useNavigate();
 
-  // function to handle log out
+  // Function to handle log out
   const handleLogout = () => {
     const auth = getAuth();
 
     signOut(auth)
       .then(() => {
         navigate("/login");
-
         console.log("User signed out.");
       })
       .catch((error) => {
@@ -21,31 +26,53 @@ const NavigationSection = () => {
       });
   };
 
+  // handle tab change
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+    onChangeSection(tab);
+  };
+
   return (
     <div className="h-[80px] flex items-center justify-between px-4">
-      {/* Logo on the left */}
+      {/* Logo */}
       <img src={Logo} alt="Buzzz Logo" className="h-full object-contain" />
 
-      {/* Centered Navigation Icons */}
+      {/* Navigation Buttons */}
       <div className="flex gap-8">
-        <button className="text-white hover:text-[#B39757]">
+        {/* Home Button */}
+        <button
+          onClick={() => handleTabChange("home")}
+          className={`${
+            activeTab === "home"
+              ? "text-[#B39757]"
+              : "text-white hover:text-[#B39757]"
+          } focus:outline-none`}
+        >
           <span className="material-icons text-3xl">home</span>
         </button>
-        <button className="text-white hover:text-[#B39757]">
+
+        {/* Explore Button */}
+        <button
+          onClick={() => handleTabChange("explore")}
+          className={`${
+            activeTab === "explore"
+              ? "text-[#B39757]"
+              : "text-white hover:text-[#B39757]"
+          } focus:outline-none`}
+        >
           <span className="material-icons text-3xl">explore</span>
         </button>
-        <button className="text-white hover:text-[#B39757]">
+
+        {/* Notifications Button */}
+        <button className="text-white hover:text-[#B39757] focus:outline-none">
           <span className="material-icons text-3xl">notifications</span>
-        </button>
-        <button className="text-white hover:text-[#B39757]">
-          <span className="material-icons text-3xl">account_circle</span>
         </button>
       </div>
 
       {/* Logout Button */}
       <button
         onClick={handleLogout}
-        className="text-white bg-red-600 px-4 py-2 rounded-md hover:bg-red-500 transition"
+        className="text-white bg-red-600 px-4 py-2 rounded-md hover:bg-red-700 transition focus:outline-none"
       >
         Log Out
       </button>
