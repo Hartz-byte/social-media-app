@@ -1,5 +1,11 @@
+import Navigation from "./navigation/Navigation";
+
 function App() {
-  return <div>Buzzz</div>;
+  return (
+    <div>
+      <Navigation />
+    </div>
+  );
 }
 
 export default App;
