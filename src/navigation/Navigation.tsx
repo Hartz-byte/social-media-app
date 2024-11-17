@@ -4,6 +4,7 @@ import SplashScreen from "../pages/SplashScreen";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Home from "../pages/Home";
+import PrivateRoute from "./PrivateRoute";
 
 const Navigation = () => {
   return (
@@ -12,7 +13,11 @@ const Navigation = () => {
         <Route path="/" element={<SplashScreen />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/Home" element={<Home />} />
+
+        {/* Protected Route */}
+        <Route element={<PrivateRoute />}>
+          <Route path="/Home" element={<Home />} />
+        </Route>
       </Routes>
     </Router>
   );

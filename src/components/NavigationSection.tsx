@@ -18,7 +18,7 @@ const NavigationSection = ({
 
     signOut(auth)
       .then(() => {
-        navigate("/login");
+        navigate("/login", { replace: true });
         console.log("User signed out.");
       })
       .catch((error) => {
