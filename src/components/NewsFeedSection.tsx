@@ -18,12 +18,17 @@ const NewsFeedSection = () => {
           <input
             type="text"
             placeholder="Tell your friends about your thoughts..."
-            className="flex-1 h-12 bg-[#242424] text-white p-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#B39757]"
+            className="flex-1 h-12 bg-[#242424] text-white p-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#B39757] mr-2"
           />
+
+          {/* Send Button */}
+          <button className="h-12 w-12 flex items-center justify-center bg-[#242424] rounded-xl hover:bg-[#1e1e1e] focus:outline-none">
+            <span className="material-icons text-white text-2xl">send</span>
+          </button>
         </div>
 
         {/* Icons Section */}
-        <div className="flex justify-between ml-16">
+        <div className="flex justify-between ml-16 mr-14">
           {/* Gallery */}
           <div className="flex items-center bg-[#242424] p-2 pl-4 pr-4 rounded-xl cursor-pointer hover:bg-[#1e1e1e]">
             <span className="material-icons text-[#20D997] mr-2">photo</span>
