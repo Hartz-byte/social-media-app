@@ -13,7 +13,6 @@
     "@apollo/client": "^3.11.10",
     "@headlessui/react": "^2.2.0",
     "@supabase/supabase-js": "^2.46.1",
-    "firebase": "^11.0.2",
     "graphql": "^16.9.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"

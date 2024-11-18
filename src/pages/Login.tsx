@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase/firebaseConfig";
 import { useNavigate } from "react-router-dom";
 
+import { supabase } from "../supabase/supabaseClient";
 import Logo from "../assets/logo/Buzzz-Logo.jpg";
 
 const Login: React.FC = () => {
@@ -13,14 +12,24 @@ const Login: React.FC = () => {
   const [error, setError] = useState("");
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
-  // function to handle login
+  // Function to handle login with Supabase
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate("/home");
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        setError(error.message);
+      } else {
+        // Redirect user to the home page after successful login
+        navigate("/home");
+      }
     } catch (err: any) {
-      setError(err.message);
+      setError("An error occurred during login. Please try again.");
     }
   };
 

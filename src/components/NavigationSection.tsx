@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAuth, signOut } from "firebase/auth";
 
+import { supabase } from "../supabase/supabaseClient";
 import Logo from "../assets/logo/Buzzz.jpg";
 
 const NavigationSection = ({
@@ -13,20 +13,16 @@ const NavigationSection = ({
   const navigate = useNavigate();
 
   // Function to handle log out
-  const handleLogout = () => {
-    const auth = getAuth();
-
-    signOut(auth)
-      .then(() => {
-        navigate("/login", { replace: true });
-        console.log("User signed out.");
-      })
-      .catch((error) => {
-        console.error("Error signing out:", error);
-      });
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      navigate("/login");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
   };
 
-  // handle tab change
+  // Handle tab change
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
     onChangeSection(tab);

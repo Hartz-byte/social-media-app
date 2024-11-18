@@ -6,14 +6,11 @@ const ProfileSection = () => {
     <div className="w-[20%] flex flex-col items-center bg-[#2a2a2a] rounded-xl">
       {/* Cover and Profile Picture */}
       <div className="relative w-full h-32 rounded-t-xl overflow-hidden mb-8">
-        {/* Cover Photo */}
         <img
           src={CoverPic}
           alt="Cover Photo"
           className="w-full h-full object-cover rounded-t-xl"
         />
-
-        {/* Profile Picture */}
         <img
           src={ProfilePic}
           alt="Profile"
@@ -30,13 +27,10 @@ const ProfileSection = () => {
 
       {/* Following and Followers */}
       <div className="flex mt-5 text-white">
-        {/* Followers */}
         <div className="flex flex-col items-center mx-4">
           <p className="text-lg font-semibold">Followers</p>
           <p className="text-xl">150</p>
         </div>
-
-        {/* Following */}
         <div className="flex flex-col items-center mx-4">
           <p className="text-lg font-semibold">Following</p>
           <p className="text-xl">120</p>
